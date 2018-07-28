@@ -12,16 +12,16 @@
 			<form class="form-inline" role="form">
 				<div class="form-group">
 					<button type="button" v-on:click="addElement" class="btn btn-info">Добавить</button>
-					<input v-model="newElement" class="form-control" type="text" id="add_el" name="todoadd" placeholder="Добавьте элемент">
+					<input v-model="newElement" class="form-control" type="text" placeholder="Добавьте задачу">
 				</div>
 				<div class="form-group">
-					<button type="search" class="btn btn-warning">Поиск</button>
-					<input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" class="form-control" type="text" name="todoadd" placeholder="Название элемента">
+					<button v-on:click="filter = 'search'" type="button" class="btn btn-warning">Поиск</button>
+					<input v-model="search" class="form-control" type="text" name="search" placeholder="Поиск по названию">
 				</div>
 				<div class="form-group">
-					<button type="button" :class="{ active: filter =='completed' }" v-on:click="filter = 'completed'" class="btn btn-default">Выполненные</button>
-					<button type="button" :class="{ active: filter =='active' }" v-on:click="filter = 'active'" class="btn btn-default">Не выполненные</button>
-					<button type="button" :class="{ active: filter =='all' }" v-on:click="filter = 'all'" class="btn btn-default">Все</button>
+					<button type="button" v-on:click="filter = 'completed'" class="btn btn-default">Выполненные</button>
+					<button type="button" v-on:click="filter = 'active'" class="btn btn-default">Не выполненные</button>
+					<button type="button" v-on:click="filter = 'all'" class="btn btn-default">Все</button>
 				</div>
 			</form>
 			<hr>
@@ -32,17 +32,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(element, index) in elementsFiltered" :key="element.id">
+					<tr v-for="(element, index) in elementsFiltered"  :key="element.id">
 						<th scope="row">
 							<div v-if="!element.editing" v-on:dblclick="editEl(element)" :class="{completed : element.completed}">
 								<input type="checkbox" name="checkbox" id="check" v-model="element.completed"> 
-								 {{element.text}}
+								 {{element.title | capitalize}}
 							 	<button type="button" v-on:click="delElement(index)" class="btn btn-danger btn-xs">Удалить</button>
 						 	</div>
 						 	<div v-else>
 						 		<button class="btn btn-success" v-on:click="doneEditEl(element)">Сохранить</button>
 						 		<button class="btn btn-danger" v-on:click="cancelEditEl(element)">Отмена</button>
-						 		<input v-model="element.text" class="form-control form-control-lg" type="text" placeholder="Добавьте элемент" v-focus>
+						 		<input v-model="element.title" class="form-control" type="text" placeholder="Добавьте элемент" v-focus>
 						 	</div>
 						</th>
 					</tr>
@@ -52,7 +52,8 @@
 	</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
