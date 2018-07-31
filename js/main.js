@@ -1,46 +1,6 @@
-Vue.use(Vuex)
-
-const store = new Vuex.Store({
-    state: {
-    	newElement: '',
-		idForElement: 3,
-		search: '',
-		beforeEditCache: '',
-		elements: [ 
-			{
-				title: "Сделать что-то",
-				editing: false,
-				completed: true,
-				id: 1,
-			},
-			{
-				title: "Сделать то-то",
-				editing: false,
-				completed: false,
-				id: 2,
-			},
-			{
-				title: "Сделать совсем другое",
-				editing: false,
-				completed: false,
-				id: 3,
-			},
-		],
-
-		filter: 'all',
-    },
-    actions: {},
-    mutations: {
-    	
-    },
-    getters: {},  
-    modules: {}
-})
-
 
 var app = new Vue ({
 	el: '#app',
-	store,
 	data: {
 		newElement: '',
 		idForElement: 4,
